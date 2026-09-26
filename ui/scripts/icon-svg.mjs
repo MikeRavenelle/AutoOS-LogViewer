@@ -1,0 +1,52 @@
+const CONTENT = `
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#232c37"/>
+      <stop offset="1" stop-color="#0b0e12"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <clipPath id="tile"><rect width="824" height="824" rx="185"/></clipPath>
+  </defs>
+  <rect width="824" height="824" rx="185" fill="url(#bg)"/>
+  <g clip-path="url(#tile)">
+    <g stroke="#ffffff" stroke-opacity="0.07" stroke-width="4">
+      <path d="M0 206H824M0 412H824M0 618H824M206 0V824M412 0V824M618 0V824"/>
+    </g>
+    <path d="M620 110V714" stroke="#e4e9ee" stroke-opacity="0.30" stroke-width="8" stroke-dasharray="20 16"/>
+    <path d="M90 622L230 622C310 622 330 480 420 462L500 452L580 466L660 450L734 458"
+          fill="none" stroke="#ffb454" stroke-opacity="0.75" stroke-width="30"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M90 610L230 610C300 610 320 320 400 310L470 305L500 170L530 305L734 300"
+          fill="none" stroke="#4cc2ff" stroke-opacity="0.55" stroke-width="44"
+          stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+    <path d="M90 610L230 610C300 610 320 320 400 310L470 305L500 170L530 305L734 300"
+          fill="none" stroke="#4cc2ff" stroke-width="34"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="620" cy="303" r="26" fill="#0b0e12" stroke="#e8f6ff" stroke-width="12"/>
+    <circle cx="620" cy="458" r="22" fill="#0b0e12" stroke="#ffe2b8" stroke-width="10"/>
+    <rect width="824" height="824" fill="url(#sheen)"/>
+  </g>
+  <rect x="2" y="2" width="820" height="820" rx="183" fill="none"
+        stroke="#ffffff" stroke-opacity="0.10" stroke-width="4"/>
+`;
+
+export function iconSvg(framing) {
+  if (framing === "mac") {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+  </filter></defs>
+  <g transform="translate(100 100)" filter="url(#shadow)">${CONTENT}</g>
+</svg>`;
+  }
+  const s = 992 / 824;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <g transform="translate(16 16) scale(${s})">${CONTENT}</g>
+</svg>`;
+}
